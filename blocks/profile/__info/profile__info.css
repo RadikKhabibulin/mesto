@@ -1,0 +1,10 @@
+.profile__info {
+    display: grid;
+    align-items: end;
+    grid-template-columns: fit-content(500px) 24px;
+    grid-template-rows: repeat(2, fit-content(100px));
+    grid-template-areas:
+        "name edit-button"
+        "description description";
+    column-gap: 18px;
+}

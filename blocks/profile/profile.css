@@ -1,6 +1,14 @@
-.profile {
+/* .profile {
     display: flex;
     align-items: center;
     width: 100%;
     position: relative;
+} */
+
+.profile {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(min-content, max-content)) 1fr;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
 }
