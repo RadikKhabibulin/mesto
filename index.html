@@ -59,7 +59,7 @@
           </div>
         </li>
         <li class="card">
-          <img src="images/card-images/karachaevsk.jpg" class="card__image" alt="Карачаевск">
+          <img src="images/card-images/karachaevsk.jpg" class="card__image" alt="Карачаево-Черкессия">
           <div class="card__body">
             <h1 class="card__title">Карачаево-Черкессия</h1>
             <button class="card__like-button" type="button"></button>
@@ -67,8 +67,21 @@
         </li>
       </ul>
     </section>
-    <footer class="footer">
-    </footer>
+    <footer class="footer">© 2022 Mesto Russia</footer>
   </main>
+
+  <div class="popup">
+    <section class="popup__container popup__container_edit-profile">
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="form-profile">
+        <input class="form-profile__item form-profile__item_el_name" type="text" required>
+        <input class="form-profile__item form-profile__item_el_description" type="text" required>
+        <button class="form-profile__save-button" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close-button" type="button"></button>
+    </section>
+  </div>
+
+  <script src="index.js"></script>
 </body>
 </html>

@@ -1,0 +1,5 @@
+.form-profile {
+    padding-top: 33px;
+    display: flex;
+    flex-direction: column;
+}
