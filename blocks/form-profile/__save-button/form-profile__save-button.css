@@ -16,3 +16,12 @@
 .form-profile__save-button:hover {
     opacity: .8;
 }
+
+@media screen and (max-width: 550px) {
+    .form-profile__save-button {
+        margin-top: 31px;
+        height: 46px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

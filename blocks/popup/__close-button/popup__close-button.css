@@ -3,6 +3,7 @@
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
     border: none;
     position: absolute;
     top: -40px;
@@ -13,7 +14,15 @@
     transition: opacity 0.25s ease;
 }
 
-
 .popup__close-button:hover {
     opacity: .5;
+}
+
+@media screen and (max-width: 550px) {
+    .popup__close-button {
+        top: -36px;
+        right: 0;
+        min-width: 20px;
+        min-height: 20px;
+    }
 }

@@ -11,15 +11,13 @@
 
 @media screen and (max-width: 768px) {
     .profile__info {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        justify-items: center;
-        margin-left: 28px;
+        grid-template-columns: 1fr 18px;
         grid-template-areas:
-        "name edit-button"
-        "description .";
+            "name edit-button"
+            "description .";
+        column-gap: 10px;
+        row-gap: 7px;
+        margin-left: 28px;
+        text-align: center;
     }
 }
-
-
-/* Доделать отступы */

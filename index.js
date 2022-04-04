@@ -1,7 +1,7 @@
-let profileName = document.querySelector('.profile__name');
-let profileDescription = document.querySelector('.profile__description');
-let nameField = document.querySelector('.form-profile__item_el_name');
-let descriptionField = document.querySelector('.form-profile__item_el_description');
+let profileNameElement = document.querySelector('.profile__name');
+let profileDescriptionElement = document.querySelector('.profile__description');
+let nameInputField = document.querySelector('.form-profile__item_el_name');
+let descriptionInputField = document.querySelector('.form-profile__item_el_description');
 
 
 function toggleProfilePopup () {
@@ -9,15 +9,15 @@ function toggleProfilePopup () {
 }
 
 function editProfile () {
-    nameField.value = profileName.innerText;
-    descriptionField.value = profileDescription.innerText;
+    nameInputField.value = profileNameElement.innerText;
+    descriptionInputField.value = profileDescriptionElement.innerText;
     toggleProfilePopup();
 }
 
 function saveProfileForm (e) {
     e.preventDefault();
-    profileName.innerText = nameField.value;
-    profileDescription.innerText = descriptionField.value;
+    profileNameElement.innerText = nameInputField.value;
+    profileDescriptionElement.innerText = descriptionInputField.value;
     toggleProfilePopup();
 }
 
