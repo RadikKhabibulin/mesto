@@ -1,9 +1,0 @@
-.popup__container_edit-profile {
-    padding: 34px 36px 0;
-}
-
-@media screen and (max-width: 550px) {
-    .popup__container_edit-profile {
-        padding: 25px 22px 0;
-    }
-}

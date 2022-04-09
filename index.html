@@ -9,7 +9,6 @@
 <body class="page">
   <header class="header">
     <a class="header__logo" href="#"></a>
-    <hr class="header__line">
   </header>
   <main class="content">
     <section class="profile">
@@ -17,71 +16,73 @@
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <p class="profile__description">Исследователь океана</p>
-        <button class="profile__edit-button" type="button"></button>
+        <button class="profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
       </div>
-      <button class="profile__add-button" type="button"></button>
+      <button class="profile__add-button" type="button" aria-label="Добавить новое место"></button>
     </section>
     <section class="cards">
       <ul class="cards__list">
         <li class="card">
           <img src="images/card-images/karachaevsk.jpg" class="card__image" alt="Карачаевск">
           <div class="card__body">
-            <h1 class="card__title">Карачаевск</h1>
-            <button class="card__like-button" type="button"></button>
+            <h2 class="card__title">Карачаевск</h2>
+            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
           </div>
         </li>
         <li class="card">
           <img src="images/card-images/elbrus.jpg" class="card__image" alt="Эльбрус">
           <div class="card__body">
-            <h1 class="card__title">Гора Эльбрус</h1>
-            <button class="card__like-button" type="button"></button>
+            <h2 class="card__title">Гора Эльбрус</h2>
+            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
           </div>
         </li>
         <li class="card">
           <img src="images/card-images/dombay.jpg" class="card__image" alt="Домбай">
           <div class="card__body">
-            <h1 class="card__title">Домбай</h1>
-            <button class="card__like-button" type="button"></button>
+            <h2 class="card__title">Домбай</h2>
+            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
           </div>
         </li>
         <li class="card">
           <img src="images/card-images/elbrus.jpg" class="card__image" alt="Эльбрус">
           <div class="card__body">
-            <h1 class="card__title">Гора Эльбрус</h1>
-            <button class="card__like-button" type="button"></button>
+            <h2 class="card__title">Гора Эльбрус</h2>
+            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
           </div>
         </li>
         <li class="card">
           <img src="images/card-images/dombay.jpg" class="card__image" alt="Домбай">
           <div class="card__body">
-            <h1 class="card__title">Домбай</h1>
-            <button class="card__like-button" type="button"></button>
+            <h2 class="card__title">Домбай</h2>
+            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
           </div>
         </li>
         <li class="card">
           <img src="images/card-images/karachaevsk.jpg" class="card__image" alt="Карачаево-Черкессия">
           <div class="card__body">
-            <h1 class="card__title">Карачаево-Черкессия</h1>
-            <button class="card__like-button" type="button"></button>
+            <h2 class="card__title">Карачаево-Черкессия</h2>
+            <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
           </div>
         </li>
       </ul>
     </section>
-    <footer class="footer">© 2022 Mesto Russia</footer>
   </main>
+  <footer class="footer">
+    <p class="footer__copyright">© 2022 Mesto Russia</p>
+  </footer>
 
   <div class="popup">
-    <section class="popup__container popup__container_edit-profile">
+    <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="form-profile">
-        <input class="form-profile__item form-profile__item_el_name" type="text" required>
-        <input class="form-profile__item form-profile__item_el_description" type="text" required>
-        <button class="form-profile__save-button" type="submit">Сохранить</button>
+      <form class="form-profile" name="form-profile" method="post">
+        <input class="form-profile__item form-profile__item_element_name" type="text" placeholder="Имя" required>
+        <input class="form-profile__item form-profile__item_element_description" type="text" placeholder="О себе" required>
+        <button class="form-profile__save-button" type="submit" aria-label="Сохранить изменения">Сохранить</button>
       </form>
-      <button class="popup__close-button" type="button"></button>
-    </section>
+      <button class="popup__close-button" type="button" aria-label="Закрыть форму редактирования"></button>
+    </div>
   </div>
 
-  <script src="index.js"></script>
+  <script src="scripts/index.js"></script>
 </body>
 </html>

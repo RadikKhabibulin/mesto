@@ -1,15 +1,8 @@
 .popup {
-    display: flex;
+    display: none;
     position: fixed;
     opacity: 0;
-    visibility: hidden;
-    background-color: rgba(0, 0, 0, .5);
-    transition: opacity .25s ease, visibility .25s ease;
+    background: rgba(0, 0, 0, .5);
     width: 100vw;
     height: 100vh;
-}
-
-.popup-opened {
-    visibility: visible;
-    opacity: 1;
 }
