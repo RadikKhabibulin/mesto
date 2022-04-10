@@ -8,7 +8,7 @@ let formProfileElement = document.querySelector('.form-profile');
 let profileEditButtonElement = document.querySelector('.profile__edit-button');
 
 function toggleProfilePopup () {
-    popupElement.classList.toggle('popup-opened');
+    popupElement.classList.toggle('popup_popup-opened');
 }
 
 function editProfile () {
