@@ -1,0 +1,19 @@
+.card__trash-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    min-width: 18px;
+    min-height: 19px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.card__trash-button:hover {
+    opacity: .6;
+}

@@ -1,11 +1,11 @@
-.form-profile {
+.popup-form {
     padding-top: 33px;
     display: flex;
     flex-direction: column;
 }
 
 @media screen and (max-width: 550px) {
-    .form-profile {
+    .popup-form {
         padding-top: 59px;
     }
 }
