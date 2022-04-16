@@ -19,6 +19,7 @@ let placeLinkInputField = placeFormElement.querySelector('.popup-form__item_elem
 
 let popupImageElement = document.querySelector('.popup_type_place-image');
 let imageContainerElement = popupImageElement.querySelector('.popup__image');
+let imageTitleElement = popupImageElement.querySelector('.popup__image-title');
 let imageCloseButtonElement = popupImageElement.querySelector('.popup__close-button');
 
 const cardListElement = document.querySelector('.cards__list');
@@ -26,66 +27,30 @@ const cardTemplate = document.querySelector('#card-template').content;
 
 const initialCards = [
     {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+        name: 'Корги номер 6',
+        link: 'https://funart.pro/uploads/posts/2021-07/1627468263_9-funart-pro-p-mini-korgi-sobaka-zhivotnie-krasivo-foto-9.jpg'
     },
     {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+        name: 'Корги номер 5',
+        link: 'https://www.domashniy-comfort.ru/images/stories/picture/00000korgi/korg_001.jpg'
     },
     {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+        name: 'Корги номер 4',
+        link: 'https://i.pinimg.com/originals/48/4e/1d/484e1d58121facb5a1b07bb7a5daa725.jpg'
     },
     {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+        name: 'Корги номер 3',
+        link: 'https://kartinkin.net/uploads/posts/2022-03/1647134927_16-kartinkin-net-p-kartinki-sobaki-korgi-16.jpg'
     },
     {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+        name: 'Корги номер 2',
+        link: 'https://kartinkin.net/uploads/posts/2022-02/1644963112_27-kartinkin-net-p-kartinki-korgi-28.jpg'
     },
     {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+        name: 'Корги номер 1',
+        link: 'https://i.pinimg.com/736x/9d/99/23/9d9923377bd4c35c45a0a4a313fa8fc4.jpg'
     }
-  ];
-
-
-const formsContent = {
-    profile: {
-        popupTitle: 'Редактировать профиль',
-        formName: 'edit-profile',
-        fields: [
-            {
-                placeholder: 'Имя',
-                name: 'profile-name',
-            },
-            {
-                placeholder: 'О себе',
-                name: 'profile-description',
-            }
-        ],
-        buttonText: 'Сохранить',
-        buttonAriaLabel: 'Сохранить изменения',
-    },
-    place: {
-        popupTitle: 'Новое место',
-        formName: 'add-place',
-        fields: [
-            {
-                placeholder: 'Название',
-                name: 'place-title',
-            },
-            {
-                placeholder: 'Ссылка на картинку',
-                name: 'place-link',
-            }
-        ],
-        buttonText: 'Сохранить',
-        buttonAriaLabel: 'Создать карточку места',
-    },
-}
+];
 
 function togglePopupOpened (popup) {
     popup.classList.toggle('popup_popup-opened');
@@ -113,14 +78,30 @@ function addPlace () {
     togglePopupOpened(popupPlaceElement);
 }
 
-function createCard (e) {
-    e.preventDefault();
+function fillOutCard (card=null) {
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-    cardElement.querySelector('.card__image').style.backgroundImage = `url(${placeLinkInputField.value})`;
-    cardElement.querySelector('.card__title').textContent = placeTitleInputField.value;
+    const cardImageElement = cardElement.querySelector('.card__image');
+
+    if (card && card.name && card.link) {
+        cardImageElement.style.backgroundImage = `url(${card.link})`;
+        cardImageElement.setAttribute('alt', card.name);
+        cardElement.querySelector('.card__title').textContent = card.name;
+    }
+    else {
+        cardImageElement.style.backgroundImage = `url(${placeLinkInputField.value})`;
+        cardImageElement.setAttribute('alt', placeLinkInputField.value);
+        cardElement.querySelector('.card__title').textContent = placeTitleInputField.value;
+    }
+
+    cardImageElement.addEventListener('click', openImage);
     cardElement.querySelector('.card__trash-button').addEventListener('click', removeCard);
     cardElement.querySelector('.card__like-button').addEventListener('click', toggleLike);
     cardListElement.prepend(cardElement);
+}
+
+function createCard (e) {
+    e.preventDefault();
+    fillOutCard();
     placeSaveButtonElement.setAttribute('disabled', true);
     togglePopupOpened(popupPlaceElement);
 }
@@ -134,7 +115,9 @@ function toggleLike () {
 }
 
 function openImage () {
-    imageContainerElement.setAttribute('src', this.style.backgroundImage.split('"')[1]);
+    imageContainerElement.setAttribute('src', this.style.backgroundImage.replace('url("', '').replace('")', ''));
+    if (this.nextElementSibling)
+        imageTitleElement.textContent = this.nextElementSibling.querySelector('.card__title').textContent;
     togglePopupOpened(popupImageElement);
 }
 
@@ -153,12 +136,5 @@ imageCloseButtonElement.addEventListener('click', () => togglePopupOpened(popupI
 
 // Init cards
 initialCards.forEach(card => {
-    const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-    cardElement.querySelector('.card__image').style.backgroundImage = `url(${card.link})`;
-    cardElement.querySelector('.card__title').textContent = card.name;
-    cardElement.querySelector('.card__image').addEventListener('click', openImage);
-    cardElement.querySelector('.card__trash-button').addEventListener('click', removeCard);
-    cardElement.querySelector('.card__like-button').addEventListener('click', toggleLike);
-    cardListElement.prepend(cardElement);
-    togglePopupOpened(popupPlaceElement);
+    fillOutCard(card);
 })
