@@ -85,15 +85,20 @@ function fillOutCard (cardName, cardLink) {
     cardImageElement.setAttribute('alt', cardName);
     cardElement.querySelector('.card__title').textContent = cardName;
 
-    cardImageElement.addEventListener('click', openImage);
+    cardImageElement.addEventListener('click', () => openImage(cardName, cardLink));
     cardElement.querySelector('.card__trash-button').addEventListener('click', removeCard);
     cardElement.querySelector('.card__like-button').addEventListener('click', toggleLike);
-    cardListElement.prepend(cardElement);
+    return cardElement;
+}
+
+function renderCard (cardName, cardLink) {
+    const newCard = fillOutCard(cardName, cardLink)
+    cardListElement.prepend(newCard);
 }
 
 function createCard (e) {
     e.preventDefault();
-    fillOutCard(placeTitleInputField.value, placeLinkInputField.value);
+    renderCard(placeTitleInputField.value, placeLinkInputField.value);
     closePopup(popupPlaceElement);
 }
 
@@ -105,11 +110,10 @@ function toggleLike () {
     this.classList.toggle('card__like-button_liked');
 }
 
-function openImage () {
-    const cardTitle = this.parentElement.querySelector('.card__title').textContent;
-    imageContainerElement.setAttribute('src', this.getAttribute('src'));
-    imageContainerElement.setAttribute('alt', cardTitle);
-    imageTitleElement.textContent = cardTitle;
+function openImage (name, link) {
+    imageContainerElement.setAttribute('src', link);
+    imageContainerElement.setAttribute('alt', name);
+    imageTitleElement.textContent = name;
     openPopup(popupImageElement);
 }
 
@@ -128,5 +132,5 @@ imageCloseButtonElement.addEventListener('click', () => closePopup(popupImageEle
 
 // Init cards
 initialCards.forEach(card => {
-    fillOutCard(card.name, card.link);
+    renderCard(card.name, card.link)
 })
