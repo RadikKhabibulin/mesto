@@ -6,14 +6,14 @@ const profileAddButtonElement = document.querySelector('.profile__add-button');
 const popupProfileElement = document.querySelector('.popup_type_edit-profile');
 const profileFormElement = popupProfileElement.querySelector('.popup-form');
 const profileCloseButtonElement = popupProfileElement.querySelector('.popup__close-button');
-const profileNameInputField = profileFormElement.querySelector('.popup-form__item_element_name');
-const profileDescriptionInputField = profileFormElement.querySelector('.popup-form__item_element_description');
+const profileNameInputField = profileFormElement.querySelector('.popup-form__input_element_name');
+const profileDescriptionInputField = profileFormElement.querySelector('.popup-form__input_element_description');
 
 const popupPlaceElement = document.querySelector('.popup_type_add-place');
 const placeFormElement = popupPlaceElement.querySelector('.popup-form');
 const placeCloseButtonElement = popupPlaceElement.querySelector('.popup__close-button');
-const placeTitleInputField = placeFormElement.querySelector('.popup-form__item_element_title');
-const placeLinkInputField = placeFormElement.querySelector('.popup-form__item_element_link');
+const placeTitleInputField = placeFormElement.querySelector('.popup-form__input_element_title');
+const placeLinkInputField = placeFormElement.querySelector('.popup-form__input_element_link');
 
 const popupImageElement = document.querySelector('.popup_type_place-image');
 const imageContainerElement = popupImageElement.querySelector('.popup__image');
@@ -50,7 +50,18 @@ const initialCards = [
     }
 ];
 
+function cleanErrors (popup) {
+    const errorList = Array.from(popup.querySelectorAll('.popup-form__input-error'));
+    errorList.forEach(error => {
+        error.textContent = '';
+    });
+}
+
 function openPopup (popup) {
+    const inputList = Array.from(popup.querySelectorAll('.popup-form__input'));
+    const buttonElement = popup.querySelector('.popup-form__save-button');
+    toggleButtonState(inputList, buttonElement, 'popup-form__save-button_disabled');
+    cleanErrors(popup);
     popup.classList.add('popup_popup-opened');
 }
 
@@ -133,4 +144,13 @@ imageCloseButtonElement.addEventListener('click', () => closePopup(popupImageEle
 // Init cards
 initialCards.forEach(card => {
     renderCard(card.name, card.link)
-})
+});
+
+enableValidation({
+    formSelector: '.popup-form',
+    inputSelector: '.popup-form__input',
+    submitButtonSelector: '.popup-form__save-button',
+    inactiveButtonClass: 'popup-form__save-button_disabled',
+    inputErrorClass: 'popup-form__input_type_error',
+    errorClass: 'popup-form__error_visible'
+});

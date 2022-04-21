@@ -40,5 +40,8 @@
 @import url(../blocks/popup/__image-title/popup__image-title.css);
 @import url(../blocks/popup-form/popup-form.css);
 @import url(../blocks/popup-form/__input-container/popup-form__input-container.css);
-@import url(../blocks/popup-form/__item/popup-form__item.css);
+@import url(../blocks/popup-form/__input/popup-form__input.css);
+@import url(../blocks/popup-form/__input/_type/popup-form__input_type_error.css);
+@import url(../blocks/popup-form/__input-error/popup-form__input-error.css);
 @import url(../blocks/popup-form/__save-button/popup-form__save-button.css);
+@import url(../blocks/popup-form/__save-button/_disabled/popup-form__save-button_disabled.css);

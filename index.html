@@ -32,8 +32,10 @@
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup-form popup-form_edit-profile" name="edit-profile" method="post">
-        <input class="popup-form__item popup-form__item_element_name" type="text" placeholder="Имя" name="profile-name" required>
-        <input class="popup-form__item popup-form__item_element_description" type="text" placeholder="О себе" name="profile-description" required>
+        <input class="popup-form__input popup-form__input_element_name" id="name-input" type="text" minlength="2" maxlength="40" placeholder="Имя" name="profile-name" required>
+        <span class="popup-form__input-error name-input-error"></span>
+        <input class="popup-form__input popup-form__input_element_description" id="description-input" type="text" minlength="2" maxlength="200" placeholder="О себе" name="profile-description" required>
+        <span class="popup-form__input-error description-input-error"></span>
         <button class="popup-form__save-button" type="submit" aria-label="Сохранить изменения">Сохранить</button>
       </form>
       <button class="popup__close-button" type="button" aria-label="Закрыть форму редактирования"></button>
@@ -44,8 +46,10 @@
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
       <form class="popup-form popup-form_add-place" name="add-place" method="post">
-        <input class="popup-form__item popup-form__item_element_title" type="text" placeholder="Название" name="place-title" required>
-        <input class="popup-form__item popup-form__item_element_link" type="text" placeholder="Ссылка на картинку" name="place-link" required>
+        <input class="popup-form__input popup-form__input_element_title" id="card-title-input" type="text" minlength="2" maxlength="30" placeholder="Название" name="place-title" required>
+        <span class="popup-form__input-error card-title-input-error"></span>
+        <input class="popup-form__input popup-form__input_element_link" id="card-link-input" type="url" placeholder="Ссылка на картинку" name="place-link" required>
+        <span class="popup-form__input-error card-link-input-error"></span>
         <button class="popup-form__save-button" type="submit" aria-label="Создать карточку места">Создать</button>
       </form>
       <button class="popup__close-button" type="button" aria-label="Закрыть форму добавления места"></button>
@@ -71,6 +75,7 @@
     </li>
   </template>
 
+  <script src="scripts/validate.js"></script>
   <script src="scripts/index.js"></script>
 </body>
 </html>
