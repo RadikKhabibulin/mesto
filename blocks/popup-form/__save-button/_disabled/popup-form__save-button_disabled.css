@@ -7,4 +7,5 @@
 
 .popup-form__save-button_disabled:hover {
     opacity: .2;
+    cursor: default;
 }

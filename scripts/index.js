@@ -50,18 +50,17 @@ const initialCards = [
     }
 ];
 
-function cleanErrors (popup) {
+function cleanErrors (popup, inputList) {
     const errorList = Array.from(popup.querySelectorAll('.popup-form__input-error'));
     errorList.forEach(error => {
         error.textContent = '';
     });
+    inputList.forEach(inputElement => {
+        inputElement.classList.remove('popup-form__input_type_error');
+    });
 }
 
 function openPopup (popup) {
-    const inputList = Array.from(popup.querySelectorAll('.popup-form__input'));
-    const buttonElement = popup.querySelector('.popup-form__save-button');
-    toggleButtonState(inputList, buttonElement, 'popup-form__save-button_disabled');
-    cleanErrors(popup);
     popup.classList.add('popup_popup-opened');
 }
 
@@ -72,6 +71,10 @@ function closePopup (popup) {
 function editProfile () {
     profileNameInputField.value = profileNameElement.textContent;
     profileDescriptionInputField.value = profileDescriptionElement.textContent;
+    const inputList = Array.from(popupProfileElement.querySelectorAll('.popup-form__input'));
+    const buttonElement = popupProfileElement.querySelector('.popup-form__save-button');
+    toggleButtonState(inputList, buttonElement, 'popup-form__save-button_disabled');
+    cleanErrors(popupProfileElement, inputList);
     openPopup(popupProfileElement);
 }
 
@@ -85,6 +88,10 @@ function saveProfileForm (e) {
 function addPlace () {
     placeTitleInputField.value = '';
     placeLinkInputField.value = '';
+    const inputList = Array.from(popupPlaceElement.querySelectorAll('.popup-form__input'));
+    const buttonElement = popupPlaceElement.querySelector('.popup-form__save-button');
+    toggleButtonState(inputList, buttonElement, 'popup-form__save-button_disabled');
+    cleanErrors(popupPlaceElement, inputList);
     openPopup(popupPlaceElement);
 }
 
