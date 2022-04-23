@@ -1,3 +1,12 @@
+const selectorsToValidate = {
+    formSelector: '.popup-form',
+    inputSelector: '.popup-form__input',
+    submitButtonSelector: '.popup-form__save-button',
+    inactiveButtonClass: 'popup-form__save-button_disabled',
+    inputErrorClass: 'popup-form__input_type_error',
+    errorClass: 'popup-form__error_visible'
+};
+
 const showInputError = (formElement, inputElement, errorMessage, selectors) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     errorElement.textContent = errorMessage;
@@ -54,3 +63,5 @@ const enableValidation = (selectors) => {
         });
     });
 };
+
+enableValidation(selectorsToValidate);

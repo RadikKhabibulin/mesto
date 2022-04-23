@@ -6,12 +6,16 @@ const profileAddButtonElement = document.querySelector('.profile__add-button');
 const popupProfileElement = document.querySelector('.popup_type_edit-profile');
 const profileFormElement = popupProfileElement.querySelector('.popup-form');
 const profileCloseButtonElement = popupProfileElement.querySelector('.popup__close-button');
+const profileSaveButtonElement = popupProfileElement.querySelector('.popup-form__save-button');
+const profileInputList = Array.from(profileFormElement.querySelectorAll('.popup-form__input'));
 const profileNameInputField = profileFormElement.querySelector('.popup-form__input_element_name');
 const profileDescriptionInputField = profileFormElement.querySelector('.popup-form__input_element_description');
 
 const popupPlaceElement = document.querySelector('.popup_type_add-place');
 const placeFormElement = popupPlaceElement.querySelector('.popup-form');
 const placeCloseButtonElement = popupPlaceElement.querySelector('.popup__close-button');
+const placeSaveButtonElement = popupPlaceElement.querySelector('.popup-form__save-button');
+const placeInputList = Array.from(placeFormElement.querySelectorAll('.popup-form__input'));
 const placeTitleInputField = placeFormElement.querySelector('.popup-form__input_element_title');
 const placeLinkInputField = placeFormElement.querySelector('.popup-form__input_element_link');
 
@@ -25,33 +29,6 @@ const cardListElement = document.querySelector('.cards__list');
 
 const cardTemplate = document.querySelector('#card-template').content;
 
-const initialCards = [
-    {
-        name: 'Корги номер 6',
-        link: 'https://funart.pro/uploads/posts/2021-07/1627468263_9-funart-pro-p-mini-korgi-sobaka-zhivotnie-krasivo-foto-9.jpg'
-    },
-    {
-        name: 'Корги номер 5',
-        link: 'https://www.domashniy-comfort.ru/images/stories/picture/00000korgi/korg_001.jpg'
-    },
-    {
-        name: 'Корги номер 4',
-        link: 'https://i.pinimg.com/originals/48/4e/1d/484e1d58121facb5a1b07bb7a5daa725.jpg'
-    },
-    {
-        name: 'Корги номер 3',
-        link: 'https://kartinkin.net/uploads/posts/2022-03/1647134927_16-kartinkin-net-p-kartinki-sobaki-korgi-16.jpg'
-    },
-    {
-        name: 'Корги номер 2',
-        link: 'https://kartinkin.net/uploads/posts/2022-02/1644963112_27-kartinkin-net-p-kartinki-korgi-28.jpg'
-    },
-    {
-        name: 'Корги номер 1',
-        link: 'https://i.pinimg.com/736x/9d/99/23/9d9923377bd4c35c45a0a4a313fa8fc4.jpg'
-    }
-];
-
 function cleanErrors (popup, inputList) {
     const errorList = Array.from(popup.querySelectorAll('.popup-form__input-error'));
     errorList.forEach(error => {
@@ -63,23 +40,23 @@ function cleanErrors (popup, inputList) {
 }
 
 function openPopup (popup) {
+    document.addEventListener('keydown', handleCloseOnEscape);
     popup.classList.add('popup_popup-opened');
 }
 
 function closePopup (popup) {
+    document.removeEventListener('keydown', handleCloseOnEscape);
     popup.classList.remove('popup_popup-opened');
 }
 
-function closePopups (evt) {
+function handleClosePopup (evt) {
     if (evt.target.classList.contains('popup') ||
         evt.target.classList.contains('popup__close-button')) {
-        popupList.forEach(popup => {
-            closePopup(popup)
-        });
+        closePopup(evt.currentTarget);
     }
 }
 
-function escapeKeyHandler (evt) {
+function handleCloseOnEscape (evt) {
     if (evt.key === 'Escape') {
         popupList.forEach(popup => {
             closePopup(popup)
@@ -87,30 +64,26 @@ function escapeKeyHandler (evt) {
     }
 }
 
-function editProfile () {
+function handleClickEditProfile () {
     profileNameInputField.value = profileNameElement.textContent;
     profileDescriptionInputField.value = profileDescriptionElement.textContent;
-    const inputList = Array.from(popupProfileElement.querySelectorAll('.popup-form__input'));
-    const buttonElement = popupProfileElement.querySelector('.popup-form__save-button');
-    toggleButtonState(inputList, buttonElement, 'popup-form__save-button_disabled');
-    cleanErrors(popupProfileElement, inputList);
+    toggleButtonState(profileInputList, profileSaveButtonElement, 'popup-form__save-button_disabled');
+    cleanErrors(popupProfileElement, profileInputList);
     openPopup(popupProfileElement);
 }
 
-function saveProfileForm (e) {
+function handleSubmitSaveProfile (e) {
     e.preventDefault();
     profileNameElement.textContent = profileNameInputField.value;
     profileDescriptionElement.textContent = profileDescriptionInputField.value;
     closePopup(popupProfileElement);
 }
 
-function addPlace () {
+function handleClickAddPlace () {
     placeTitleInputField.value = '';
     placeLinkInputField.value = '';
-    const inputList = Array.from(popupPlaceElement.querySelectorAll('.popup-form__input'));
-    const buttonElement = popupPlaceElement.querySelector('.popup-form__save-button');
-    toggleButtonState(inputList, buttonElement, 'popup-form__save-button_disabled');
-    cleanErrors(popupPlaceElement, inputList);
+    toggleButtonState(placeInputList, placeSaveButtonElement, 'popup-form__save-button_disabled');
+    cleanErrors(popupPlaceElement, placeInputList);
     openPopup(popupPlaceElement);
 }
 
@@ -122,19 +95,19 @@ function fillOutCard (cardName, cardLink) {
     cardImageElement.setAttribute('alt', cardName);
     cardElement.querySelector('.card__title').textContent = cardName;
 
-    cardImageElement.addEventListener('click', () => openImage(cardName, cardLink));
+    cardImageElement.addEventListener('click', () => handleClickOpenImage(cardName, cardLink));
     cardElement.querySelector('.card__trash-button').addEventListener('click', removeCard);
     cardElement.querySelector('.card__like-button').addEventListener('click', toggleLike);
     return cardElement;
 }
 
-function renderCard (cardName, cardLink) {
-    const newCard = fillOutCard(cardName, cardLink)
+function renderCard (card) {
+    const newCard = fillOutCard(card.name, card.link);
     cardListElement.prepend(newCard);
 }
 
-function createCard (e) {
-    e.preventDefault();
+function handleSubminAddCard (evt) {
+    evt.preventDefault();
     renderCard(placeTitleInputField.value, placeLinkInputField.value);
     closePopup(popupPlaceElement);
 }
@@ -147,34 +120,23 @@ function toggleLike () {
     this.classList.toggle('card__like-button_liked');
 }
 
-function openImage (name, link) {
+function handleClickOpenImage (name, link) {
     imageContainerElement.setAttribute('src', link);
     imageContainerElement.setAttribute('alt', name);
     imageTitleElement.textContent = name;
     openPopup(popupImageElement);
 }
 
-profileEditButtonElement.addEventListener('click', editProfile);
-profileFormElement.addEventListener('submit', saveProfileForm);
+profileEditButtonElement.addEventListener('click', handleClickEditProfile);
+profileFormElement.addEventListener('submit', handleSubmitSaveProfile);
 
-profileAddButtonElement.addEventListener('click', addPlace);
-placeFormElement.addEventListener('submit', createCard);
+profileAddButtonElement.addEventListener('click', handleClickAddPlace);
+placeFormElement.addEventListener('submit', handleSubminAddCard);
 
 popupList.forEach(popup => {
-    popup.addEventListener('click', closePopups)
+    popup.addEventListener('click', handleClosePopup)
 })
 
-document.addEventListener('keydown', escapeKeyHandler);
-
 initialCards.forEach(card => {
-    renderCard(card.name, card.link)
-});
-
-enableValidation({
-    formSelector: '.popup-form',
-    inputSelector: '.popup-form__input',
-    submitButtonSelector: '.popup-form__save-button',
-    inactiveButtonClass: 'popup-form__save-button_disabled',
-    inputErrorClass: 'popup-form__input_type_error',
-    errorClass: 'popup-form__error_visible'
+    renderCard(card)
 });
