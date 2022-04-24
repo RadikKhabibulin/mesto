@@ -59,7 +59,8 @@ function handleClosePopup (evt) {
 function handleCloseOnEscape (evt) {
     if (evt.key === 'Escape') {
         popupList.forEach(popup => {
-            closePopup(popup)
+            if (popup.classList.contains('popup_popup-opened'))
+                closePopup(popup);
         })
     }
 }
@@ -108,7 +109,10 @@ function renderCard (card) {
 
 function handleSubminAddCard (evt) {
     evt.preventDefault();
-    renderCard(placeTitleInputField.value, placeLinkInputField.value);
+    renderCard({
+        name: placeTitleInputField.value,
+        link: placeLinkInputField.value
+    });
     closePopup(popupPlaceElement);
 }
 
