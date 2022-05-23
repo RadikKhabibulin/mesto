@@ -24,3 +24,14 @@ const initialCards = [
         link: 'https://i.pinimg.com/736x/9d/99/23/9d9923377bd4c35c45a0a4a313fa8fc4.jpg'
     }
 ];
+
+const selectorsToValidate = {
+    formSelector: '.popup-form',
+    inputSelector: '.popup-form__input',
+    submitButtonSelector: '.popup-form__save-button',
+    inactiveButtonClass: 'popup-form__save-button_disabled',
+    inputErrorClass: 'popup-form__input_type_error',
+    errorClass: 'popup-form__error_visible'
+};
+
+export { initialCards, selectorsToValidate };
