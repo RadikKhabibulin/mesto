@@ -24,12 +24,16 @@ const placeLinkInputField = placeFormElement.querySelector('.popup-form__input_e
 const popupList = Array.from(document.querySelectorAll('.popup'));
 const cardListElement = document.querySelector('.cards__list');
 
-function openPopup (popup) {
+export default function openPopup (popup) {
     document.addEventListener('keydown', handleCloseOnEscape);
     popup.classList.add('popup_popup-opened');
 }
 
 function closePopup (popup) {
+    if (!popup) {
+        return;
+    }
+
     document.removeEventListener('keydown', handleCloseOnEscape);
     popup.classList.remove('popup_popup-opened');
 }
@@ -43,10 +47,7 @@ function handleClosePopup (evt) {
 
 function handleCloseOnEscape (evt) {
     if (evt.key === 'Escape') {
-        popupList.forEach(popup => {
-            if (popup.classList.contains('popup_popup-opened'))
-                closePopup(popup);
-        })
+        closePopup(document.querySelector('.popup_popup-opened'));
     }
 }
 
@@ -65,8 +66,7 @@ function handleSubmitSaveProfile (e) {
 }
 
 function handleClickAddPlace () {
-    placeTitleInputField.value = '';
-    placeLinkInputField.value = '';
+    placeFormElement.reset();
     validatePlaceForm.resetValidation();
     openPopup(popupPlaceElement);
 }
@@ -88,12 +88,14 @@ function handleSubminAddCard (evt) {
 validateProfileForm.enableValidation();
 profileEditButtonElement.addEventListener('click', handleClickEditProfile);
 profileFormElement.addEventListener('submit', handleSubmitSaveProfile);
-popupProfileElement.addEventListener('click', handleClosePopup);
 
 validatePlaceForm.enableValidation();
 profileAddButtonElement.addEventListener('click', handleClickAddPlace);
 placeFormElement.addEventListener('submit', handleSubminAddCard);
-popupPlaceElement.addEventListener('click', handleClosePopup);
+
+popupList.forEach(popup => {
+  popup.addEventListener('mousedown', handleClosePopup);
+});
 
 initialCards.forEach(card => {
     renderCard(card);
