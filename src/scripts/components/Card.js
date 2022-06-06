@@ -1,5 +1,5 @@
 export default class Card {
-    constructor({ cardName, cardLink }, templateSelector, handleCardClick) {
+    constructor({ cardName, cardLink, handleCardClick }, templateSelector) {
         this._cardName = cardName;
         this._cardLink = cardLink;
         this._cardTemplate = document.querySelector(templateSelector).content;
@@ -25,7 +25,7 @@ export default class Card {
         cardImageElement.setAttribute('alt', this._cardName);
         cardElement.querySelector('.card__title').textContent = this._cardName;
 
-        cardImageElement.addEventListener('click', () => { this._handleCardClick(this._cardLink, this._cardName) });
+        cardImageElement.addEventListener('click', () => { this._handleCardClick(this._cardName, this._cardLink,) });
         cardElement.querySelector('.card__trash-button').addEventListener('click', this._removeCard);
         cardElement.querySelector('.card__like-button').addEventListener('click', this._toggleLike);
         return cardElement;

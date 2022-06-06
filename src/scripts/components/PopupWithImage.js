@@ -7,9 +7,9 @@ export default class PopupWithImage extends Popup {
         this._imageTitleElement = this._popup.querySelector('.popup__image-title');
     }
 
-    open(cardLink, cardName) {
-        this._imageContainerElement.setAttribute('src', cardLink);
+    open(cardName, cardLink) {
         this._imageContainerElement.setAttribute('alt', cardName);
+        this._imageContainerElement.setAttribute('src', cardLink);
         this._imageTitleElement.textContent = cardName;
         super.open();
     }

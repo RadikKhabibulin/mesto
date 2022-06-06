@@ -19,7 +19,7 @@ import {
 } from '../utils/constants.js';
 
 
-function handleClickEditProfile () {
+function handleClickEditProfile() {
     const { name, description } = userInfo.getUserInfo();
     profileNameInputField.value = name;
     profileDescriptionInputField.value = description;
@@ -28,9 +28,20 @@ function handleClickEditProfile () {
     popupProfileForm.open();
 }
 
-function handleClickAddPlace () {
+function handleClickAddPlace() {
     validatePlaceForm.resetValidation();
     popupCardForm.open();
+}
+
+function initCardItem(data) {
+    return new Card({
+        cardName: data.name,
+        cardLink: data.link,
+        handleCardClick: (name, link) => {
+            popupWithImage.open(name, link);
+        }},
+        '#card-template'
+    );
 }
 
 const userInfo = new UserInfo({
@@ -55,11 +66,10 @@ const popupCardForm = new PopupWithForm({
     popupSelector: popupSelectors.place,
     handleSubmitForm: (evt, values) => {
         evt.preventDefault();
-        const card = new Card(
-            { cardName: values['place-title'], cardLink: values['place-link'] },
-            '#card-template',
-            popupWithImage.open.bind(popupWithImage)
-        );
+        const card = initCardItem({
+            name: values['place-title'],
+            link: values['place-link']
+        });
         const cardElement = card.createCard();
         cardList.addItem(cardElement);
         popupCardForm.close();
@@ -69,14 +79,9 @@ popupCardForm.setEventListeners();
 
 const cardList = new Section({
     items: initialCards,
-    renderer: (cardItem) => {
-        const card = new Card(
-            { cardName: cardItem.name, cardLink: cardItem.link },
-            '#card-template',
-            popupWithImage.open.bind(popupWithImage)
-        );
+    renderer: (cardData) => {
+        const card = initCardItem(cardData);
         const cardElement = card.createCard();
-
         cardList.addItem(cardElement);
     },
 }, '.cards__list');
