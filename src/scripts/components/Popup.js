@@ -28,4 +28,8 @@ export default class Popup {
             }
         });
     }
+
+    updateStatus(status) {
+        this._popup.querySelector('.popup-form__save-button').textContent = status;
+    }
 }

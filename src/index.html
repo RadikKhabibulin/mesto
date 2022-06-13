@@ -11,10 +11,12 @@
   </header>
   <main class="content">
     <section class="profile">
-      <div class="profile__avatar"></div>
+      <div class="profile__avatar">
+        <button class="profile__avatar-button" type="button" aria-label="Редактировать аватар"></button>
+      </div>
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <p class="profile__description">Исследователь океана</p>
+        <h1 class="profile__name"></h1>
+        <p class="profile__description"></p>
         <button class="profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
       </div>
       <button class="profile__add-button" type="button" aria-label="Добавить новое место"></button>
@@ -26,6 +28,25 @@
   <footer class="footer">
     <p class="footer__copyright">© 2022 Mesto Russia</p>
   </footer>
+
+  <div class="popup popup_type_edit-avatar">
+    <div class="popup__container">
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="popup-form popup-form_edit-avatar" name="edit-avatar" method="post">
+        <input
+          class="popup-form__input popup-form__input_element_link"
+          id="avatar-link-input"
+          type="url"
+          placeholder="Ссылка на аватар"
+          name="avatar-link"
+          required
+        >
+        <span class="popup-form__input-error avatar-link-input-error"></span>
+        <button class="popup-form__save-button" type="submit" aria-label="Сохранить изменения">Сохранить</button>
+      </form>
+      <button class="popup__close-button" type="button" aria-label="Закрыть форму редактирования аватара"></button>
+    </div>
+  </div>
 
   <div class="popup popup_type_edit-profile">
     <div class="popup__container">
@@ -97,14 +118,27 @@
     </div>
   </div>
 
+  <div class="popup popup_type_delete-place">
+    <div class="popup__container popup__container_type_delete-place">
+      <h2 class="popup__title">Вы уверены?</h2>
+      <form class="popup-form popup-form_delete-place" name="delete-place" method="post">
+        <button class="popup-form__save-button" type="submit" aria-label="Удалить карточку места">Да</button>
+      </form>
+      <button class="popup__close-button" type="button" aria-label="Закрыть форму добавления места"></button>
+    </div>
+  </div>
+
   <template id="card-template">
     <li class="card">
       <img class="card__image" src="<%=require('./images/header/logo.svg')%>" alt="Место">
       <div class="card__body">
         <h2 class="card__title"></h2>
-        <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
+        <div class="card__like-container">
+          <button class="card__like-button" type="button" aria-label="Поставить лайк"></button>
+          <p class="card__likes-counter">0</p>
+        </div>
       </div>
-      <button class="card__trash-button" type="button" aria-label="Удалить карточку"></button>
+      <button class="card__trash-button card__trash-button_hidden" type="button" aria-label="Удалить карточку"></button>
     </li>
   </template>
 </body>
