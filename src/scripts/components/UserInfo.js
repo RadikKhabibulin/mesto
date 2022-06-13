@@ -20,10 +20,6 @@ export default class UserInfo {
         this._id = id;
     }
 
-    getUserAvatar() {
-        return this._avatarElement.style.backgroundImage.slice(5, -2) ;
-    }
-
     setUserAvatar(avatar) {
         this._avatarElement.style.backgroundImage = `url(${avatar})`;
     }

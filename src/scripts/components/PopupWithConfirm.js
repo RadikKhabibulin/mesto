@@ -12,6 +12,10 @@ export default class PopupWithConfirm extends Popup {
         super.open();
     }
 
+    updateStatus(status) {
+        this._popup.querySelector('.popup-form__save-button').textContent = status;
+    }
+
     setEventListeners() {
         super.setEventListeners();
         this._popup.addEventListener('submit', (evt) => this._handleSubmitForm(evt, this._removedItem));

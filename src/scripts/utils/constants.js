@@ -41,7 +41,6 @@ const placeFormElement = popupPlaceElement.querySelector(popupFormSelector);
 
 const popupAvatarElement = document.querySelector(popupSelectors.avatar);
 const avatarFormElement = popupAvatarElement.querySelector(popupFormSelector);
-const avatarLinkInputField = avatarFormElement.querySelector(profileInputFieldsSelectors.avatar);
 
 const profileNameInputField = profileFormElement.querySelector(profileInputFieldsSelectors.name);
 const profileDescriptionInputField = profileFormElement.querySelector(profileInputFieldsSelectors.description);
@@ -61,7 +60,6 @@ export {
     avatarFormElement,
     profileFormElement,
     placeFormElement,
-    avatarLinkInputField,
     profileNameInputField,
     profileDescriptionInputField,
     mestoApiLink,

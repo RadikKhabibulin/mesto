@@ -42,19 +42,7 @@ export default class Api {
     }
 
     updateUserAvatar(data) {
-        return fetch(data.avatar)
-        .then(res => {
-            if (res.ok) {
-                return;
-            }
-            return Promise.reject(res.status);
-        })
-        .then(() => {
-            return this._sendData(`${this._baseUrl}/users/me/avatar`, 'PATCH', data)
-        })
-        .catch(err => {
-            return Promise.reject(`${err}. Ссылка на новый аватар недействительна`);
-        })
+        return this._sendData(`${this._baseUrl}/users/me/avatar`, 'PATCH', data)
     }
 
     getCards() {

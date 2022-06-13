@@ -20,18 +20,11 @@ export default class Card {
     }
 
     _toggleLike() {
-        this._cardLikeElement.classList.toggle('card__like-button_liked');
+        this._cardLikeElement.classList.toggle('card__like-button_liked', this._isLiked());
     }
 
     _isLiked() {
-        let isLiked = false;
-        this._cardData.likes.forEach(like => {
-            if (like._id === this._userId) {
-                isLiked = true;
-                return;
-            }
-        })
-        return isLiked;
+        return this._cardData.likes.some(like => like._id === this._userId)
     }
 
     _userIsOwner() {
@@ -67,10 +60,7 @@ export default class Card {
             this._cardTrashElement.classList.remove('card__trash-button_hidden');
         }
 
-        if (this._isLiked()) {
-            this._toggleLike();
-        }
-
+        this._toggleLike();
         return this._cardElement;
     }
 
